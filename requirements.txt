@@ -1,0 +1,4 @@
+playsound
+smbus2
+ticlib
+numpy

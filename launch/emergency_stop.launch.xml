@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- emergency_stop_node -->
+  <node pkg="litter_collector_robot" exec="emergency_stop_node" name="emergency_stop_node" output="screen">
+    <param from="$(find-pkg-share litter_collector_robot)/config/raspberry_gpio.yaml" />
+  </node>
+
+</launch>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- lights_node -->
+  <node pkg="litter_collector_robot" exec="lights_node" name="lights_node" output="screen">
+    <param from="$(find-pkg-share litter_collector_robot)/config/raspberry_gpio.yaml" />
+  </node>
+
+</launch>

@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- roboclaw_twist_node -->
+  <node pkg="litter_collector_robot" exec="roboclaw_twist_node" name="roboclaw_twist_node" output="screen">
+    <param from="$(find-pkg-share litter_collector_robot)/config/roboclaw.yaml" />
+  </node>
+
+</launch>

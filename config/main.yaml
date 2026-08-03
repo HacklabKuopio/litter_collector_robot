@@ -1,0 +1,22 @@
+shutdown_node:
+  ros__parameters:
+    shutdown_timeout_sec: 5.0
+
+robot_control_node:
+  ros__parameters:
+    linear_velocity_scale: 0.25
+    angular_velocity_scale: 0.25
+
+health_node:
+  ros__parameters:
+    charging_voltage: 27.0
+    yellow_alert_voltage: 24.0
+    red_alert_voltage: 23.5
+    # these State of Charge (soc) steps correspond roughly by their index to % of charge in 10% steps
+    soc_steps: [21.0, 22.62, 23.16, 23.5, 23.8, 24.12, 24.4, 24.64, 24.84, 25.0, 25.2]
+
+nose_node:
+  ros__parameters:
+    i2c_bus: 1
+    i2c_z_address: 14
+    i2c_y_address: 15

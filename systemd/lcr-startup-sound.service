@@ -1,0 +1,18 @@
+[Unit]
+Description=Litter Collector Robot system startup sound
+After=syslog.target default.target
+
+[Service]
+#Type=forking
+#KillMode=none
+#RemainAfterExit=no
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/opt/robodev/litter_collector_robot
+PIDFile=/opt/robodev/litter_collector_robot/.startup-%H:%i.pid
+ExecStart=aplay /opt/robodev/litter_collector_robot/sounds/system_startup.wav 2>&1 >/dev/null
+ExecStop=
+
+[Install]
+WantedBy=multi-user.target
+

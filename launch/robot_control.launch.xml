@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- ds4_driver node -->
+  <!-- <include file="$(find-pkg-share ds4_driver)/launch/ds4_driver.launch.xml" /> -->
+
+  <!-- shutdown_node -->
+  <include file="$(find-pkg-share litter_collector_robot)/launch/shutdown.launch.xml" />
+
+  <!-- robot_control_node -->
+  <node pkg="litter_collector_robot" exec="robot_control_node" name="robot_control_node" output="screen">
+    <param from="$(find-pkg-share litter_collector_robot)/config/main.yaml" />
+    <param from="$(find-pkg-share litter_collector_robot)/config/raspberry_gpio.yaml" />
+    <!-- <remap from="/lcr/cmd_vel" to="/turtle1/cmd_vel"/> -->
+  </node>
+
+</launch>

@@ -1,0 +1,107 @@
+# ./.tmuxinator.yml
+
+# Copyright 2023-2026 Hacklab Kuopio
+#
+# Licensed under the Apache License, Version 2.0.
+# See the LICENSE file in the project root for license information.
+
+name: litter_collector_robot
+root: /opt/robodev/litter_collector_robot/
+
+# Optional tmux socket
+# socket_name: lcr
+
+# Project hooks
+
+# Runs on project start, always
+# on_project_start: command
+
+# Run on project start, the first time
+# on_project_first_start: command
+
+# Run on project start, after the first time
+# on_project_restart: command
+
+# Run on project exit ( detaching from tmux session )
+# on_project_exit: command
+
+# Run on project stop
+# on_project_stop: command
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+# Specifies (by name or index) which window will be selected on project startup. If not set, the first window is used.
+# startup_window: editor
+
+# Specifies (by index) which pane of the specified window will be selected on project startup. If not set, the first pane is used.
+startup_pane: 2
+
+# Controls whether the tmux session should be attached to automatically. Defaults to true.
+# attach: false
+
+# Use `tmux list-windows` to change the layout, by copying the layout string from list-windows, the part inside [layout ] brackets.
+
+windows:
+  - nodes:
+      layout: a413,211x56,0,0{102x56,0,0[102x18,0,0,0,102x22,0,19,2,102x14,0,42,3],108x56,103,0[108x12,103,0,4,108x17,103,13,5,108x13,103,31,6,108x11,103,45,7]}
+      # Synchronize all panes of this window, can be enabled before or after the pane commands run.
+      # synchronize: after
+      panes:
+        - status:
+          - printf '\033]2;%s\033\\' 'robopi status'
+          - htop --filter="ros2"
+        - robot_control:
+          - printf '\033]2;%s\033\\' 'robot control'
+          - ros2 launch litter_collector_robot robot_control.launch.xml
+        - vacuum:
+          - printf '\033]2;%s\033\\' 'vacuum'
+          - ros2 launch litter_collector_robot vacuum.launch.xml
+        - health:
+          - printf '\033]2;%s\033\\' 'health'
+          - ros2 launch litter_collector_robot health.launch.xml
+        - roboclaw:
+          - printf '\033]2;%s\033\\' 'roboclaw'
+          - ros2 launch litter_collector_robot roboclaw_twist.launch.xml
+        - nose:
+          - printf '\033]2;%s\033\\' 'nose'
+          - ros2 launch litter_collector_robot nose.launch.xml
+        - emergency_stop:
+          - printf '\033]2;%s\033\\' 'emergency stop'
+          - ros2 launch litter_collector_robot emergency_stop.launch.xml
+
+  - nodes:
+      layout: 600a,211x56,0,0{105x56,0,0[105x15,0,0,1,105x40,0,16,8],105x56,106,0[105x28,106,0,9,105x13,106,29,10,105x13,106,43,11]}
+      panes:
+        - ds4_driver:
+          - printf '\033]2;%s\033\\' 'ds4 driver'
+          - ros2 launch ds4_driver ds4_driver.launch.xml
+        - lights:
+          - printf '\033]2;%s\033\\' 'lights'
+          - ros2 launch litter_collector_robot lights.launch.xml
+        - topics:
+          - printf '\033]2;%s\033\\' 'ros topics'
+          - watch -n 15 ros2 topic list
+        - audio:
+          - printf '\033]2;%s\033\\' 'audio'
+          - ros2 launch litter_collector_robot audio.launch.xml
+          # - ros2 run nml_task_audio audio --ros-args --params-file config/audio.yaml
+        - brake:
+          - printf '\033]2;%s\033\\' 'brake'
+          - ros2 launch litter_collector_robot brake_control.launch.xml
+
+  # - emergency_topics:
+  #     layout: d95e,211x52,0,0{52x52,0,0,76,52x52,53,0,79,52x52,106,0,77,52x52,159,0,78}
+  #     panes:
+  #       - sleep 10s; ros2 topic echo /lcr/emergency_stop
+  #       - sleep 10s; ros2 topic echo /lcr/emergency_stop_ds4_button
+  #       - sleep 10s; ros2 topic echo /lcr/emergency_stop_reset
+
+  # - logs: tail -f log/development.log
+

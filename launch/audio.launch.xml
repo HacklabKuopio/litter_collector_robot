@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- audio_node -->
+  <node pkg="litter_collector_robot" exec="audio_node" name="audio_node" output="screen">
+    <param from="$(find-pkg-share litter_collector_robot)/config/audio.yaml" />
+  </node>
+
+</launch>

@@ -1,0 +1,25 @@
+vacuum_node:
+  ros__parameters:
+    vacuum_pin: 17              # GPIO17 (pin 11) - vacuum cleaner control output
+
+brake_control_node:
+  ros__parameters:
+    brake_pin: 22               # GPIO22 (pin 15) - brake control (fail-safe) output
+    brake_feedback_pin: 10      # GPIO10 (pin 19)
+    brake_apply_delay: 3.0      # delay to apply brakes after moving stopped
+
+emergency_stop_node:
+  ros__parameters:
+    emergency_stop_pin: 5       # GPIO5 (pin 29) - emergency stop input (fail-safe)
+    emergency_stop_output: 27   # GPIO27 - emergency stop fail-safe
+
+lights_node:
+  ros__parameters:
+    indicator_light_yellow_pin: 12  # GPIO26
+    indicator_light_green_pin: 16   # GPIO27
+    indicator_light_red_pin: 26     # GPIO25
+    indicator_light_white_pin: 20   # GPIO28
+    indicator_buzzer_pin: 21        # GPIO29
+    flood_light_pin: 19             # GPIO24
+    main_light_left_pin: 6          # GPIO22
+    main_light_right_pin: 13        # GPIO23

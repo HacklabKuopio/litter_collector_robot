@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<launch>
+
+  <include file="$(find-pkg-share ds4_driver)/launch/ds4_driver.launch.xml" />
+
+  <include file="$(find-pkg-share litter_collector_robot)/launch/emergency_stop.launch.xml" />
+  <include file="$(find-pkg-share litter_collector_robot)/launch/brake_control.launch.xml" />
+  <include file="$(find-pkg-share litter_collector_robot)/launch/roboclaw_twist.launch.xml" />
+  <include file="$(find-pkg-share litter_collector_robot)/launch/robot_control.launch.xml" />
+  <include file="$(find-pkg-share litter_collector_robot)/launch/nose.launch.xml" />
+
+</launch>

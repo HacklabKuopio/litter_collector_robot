@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- nose_node -->
+  <node pkg="litter_collector_robot" exec="nose_node" name="nose_node" output="screen">
+    <param from="$(find-pkg-share litter_collector_robot)/config/main.yaml" />
+  </node>
+
+</launch>

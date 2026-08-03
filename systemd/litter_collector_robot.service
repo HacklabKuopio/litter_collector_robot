@@ -1,0 +1,20 @@
+[Unit]
+Description=Litter Collector Robot ROS services
+After=syslog.target network.target
+After=systemd-user-sessions.service plymouth-quit-wait.service
+After=rc-local.service
+
+[Service]
+Type=forking
+KillMode=none
+RemainAfterExit=yes
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/opt/robodev/litter_collector_robot
+PIDFile=/opt/robodev/litter_collector_robot/.systemd-%H:%i.pid 
+ExecStart=/usr/local/bin/tmuxinator start -p /opt/robodev/litter_collector_robot/tmuxinator.prod.yml
+ExecStop=/usr/local/bin/tmuxinator stop -p /opt/robodev/litter_collector_robot/tmuxinator.prod.yml
+
+[Install]
+WantedBy=multi-user.target
+
